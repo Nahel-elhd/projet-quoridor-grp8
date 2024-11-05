@@ -1,1 +1,23 @@
+#include <stdio.h>
 
+#define SIZE 9 // Taille du plateau
+
+// Fonction pour afficher le plateau
+void Board() {
+    // Afficher les lettres en haut
+    printf("   A B C D E F G H I\n");
+
+    // Afficher les numéros sur le côté gauche et le plateau
+    for (int i = 0; i < SIZE; i++) {
+        printf("%d ", i + 1); // Affiche le numéro de ligne
+        for (int j = 0; j < SIZE; j++) {
+            printf(" ."); // Représentation des cases vides
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    Board(); // Appeler la fonction pour afficher le plateau
+    return 0;
+}
