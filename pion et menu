@@ -40,7 +40,7 @@ void afficher_plateau(char plateau[SIZE][SIZE]) {
     // Affichage des indices horizontaux (A à I)
     printf("     ");
     for (int j = 0; j < SIZE; j++) {
-        printf("  %c  ", 'A' + j);  // Afficher les lettres de A à I
+        printf("   %c  ", 'A' + j);  // Afficher les lettres de A à I
     }
     printf("\n");
 
