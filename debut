@@ -1,60 +1,60 @@
 #include <stdio.h>
 #include"fonction.h"
-#include <windows.h>
-int main()
+int main(void)
 {
     int nbr_joueur;
     char j1[10];
     char j2[10];
     char j3[10];
     char j4[10];
+    int pionJ1;
 
-    printf("chosissez le nombre de joueur (1 à 4 max) :\n");
+    printf("choisissez le nombre de joueur humain (1 à 4 max) :\n");
     scanf("%d",&nbr_joueur);
+
     switch (nbr_joueur)
     {
-    case 1:
-        choixNom(j1);
-        printf("Le joueur 1 est : %s\n",j1);
-        printf("Le joueur 2 est : IA2\n");
-        break;
-    case 2:
-        choixNom(j1);
-        printf("Le joueur 1 est : %s\n",j1);
-        choixNom(j2);
-        printf("Le joueur 2 est : %s\n",j2);
-        break;
-    case 3:
-        choixNom(j1);
-        printf("Le joueur 1 est : %s\n",j1);
-        choixNom(j2);
-        printf("Le joueur 2 est : %s\n",j2);
-        choixNom(j3);
-        printf("Le joueur 3 est : %s\n",j3);
-        printf("Le joueur 4 est : IA4\n");
-        break;
-    case 4:
-        choixNom(j1);
-        printf("Le joueur 1 est : %s\n",j1);
-        choixNom(j2);
-        printf("Le joueur 2 est : %s\n",j2);
-        choixNom(j3);
-        printf("Le joueur 3 est : %s\n",j3);
-        choixNom(j4);
-        printf("Le joueur 4 est : %s\n",j4);
-        break;
-    default:
-        printf("ERREUR\n");
-        break;
+        case 1:
+            choixNom(j1);
+            printf("Le joueur 1 est : %s\n",j1);
+            printf("Le joueur 2 est : IA2\n");
+            choixPion(pionJ1);
 
+            break;
+        case 2:
+            choixNom(j1);
+            choixNom(j2);
+            printf("Le joueur 1 est : %s\n",j1);
+            printf("Le joueur 2 est : %s\n",j2);
+            break;
+        case 3:
+            choixNom(j1);
+            choixNom(j2);
+            choixNom(j3);
+            printf("Le joueur 1 est : %s\n",j1);
+            printf("Le joueur 2 est : %s\n",j2);
+            printf("Le joueur 3 est : %s\n",j3);
+            printf("Le joueur 4 est : IA4\n");
+            break;
+        case 4:
+            choixNom(j1);
+            printf("Le joueur 1 est : %s\n",j1);
+            choixNom(j2);
+            printf("Le joueur 2 est : %s\n",j2);
+            choixNom(j3);
+            printf("Le joueur 3 est : %s\n",j3);
+            choixNom(j4);
+            printf("Le joueur 4 est : %s\n",j4);
+            break;
+        default:
+            printf("ERREUR\n");
+            break;
     }
+
+
     return 0;
 }
-
-
-
----------------------------------
-
+---------------------------------------
 //
 // Created by elhad on 05/11/2024.
 //
@@ -66,7 +66,36 @@ void choixNom(char nom[10])
 printf("entrer votre nom : ");
     scanf("%s", nom);
 }
-----------------
+
+int choixPion(int a)
+{
+    printf("taper un nombre pour choisir un pion parmis les suivants :\n 1.Le coeur\n 2.Le carreau\n 3. Le trèfle\n 4.Le pic\n ");
+    scanf("%d", &a);
+    while(a<1 || a>4)
+    {
+        printf("veuillez choisir une valeur valide parmis :\n 1.Le coeur\n 2.Le carreau\n 3. Le trèfle\n 4.Le pic\n ");
+        scanf("%d", &a);
+    }
+
+    if (a == 1)
+    {
+        printf("vous avez choisis :%c",3);
+    }
+    else if (a == 2)
+    {
+        printf("vous avez choisis :%c",4);
+    }
+    else if (a == 3)
+    {
+        printf("vous avez choisis :%c",5);
+    }
+    else if (a == 4)
+    {
+        printf("vous avez choisis :%c",6);
+    }
+
+}
+------------------------------------------
 //
 // Created by elhad on 05/11/2024.
 //
@@ -74,5 +103,5 @@ printf("entrer votre nom : ");
 #ifndef FONCTION_H
 #define FONCTION_H
 void choixNom(char nom[10]);
+int choixPion(int);
 #endif //FONCTION_H
-
