@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include"fonction.h"
+
+
 int main(void)
 {
     int nbr_joueur;
@@ -7,7 +9,7 @@ int main(void)
     char j2[10];
     char j3[10];
     char j4[10];
-    int pionJ1;
+
 
     printf("choisissez le nombre de joueur humain (1 à 4 max) :\n");
     scanf("%d",&nbr_joueur);
@@ -16,35 +18,36 @@ int main(void)
     {
         case 1:
             choixNom(j1);
-            printf("Le joueur 1 est : %s\n",j1);
-            printf("Le joueur 2 est : IA2\n");
-            choixPion(pionJ1);
+            printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
+            printf("Joueur 2 est : IA2 , votre pion est le carreau : %c\n",4);
 
             break;
         case 2:
             choixNom(j1);
             choixNom(j2);
-            printf("Le joueur 1 est : %s\n",j1);
-            printf("Le joueur 2 est : %s\n",j2);
+            printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
+        printf("Joueur 2 est : %s , votre pion est le carreau : %c\n",j2,4);
+
             break;
         case 3:
             choixNom(j1);
             choixNom(j2);
             choixNom(j3);
-            printf("Le joueur 1 est : %s\n",j1);
-            printf("Le joueur 2 est : %s\n",j2);
-            printf("Le joueur 3 est : %s\n",j3);
-            printf("Le joueur 4 est : IA4\n");
+            printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
+            printf("Joueur 2 est : %s, votre pion est le carreau : %c\n",j2,4);
+            printf("Joueur 3 est : %s, votre pion est le trefle : %c\n",j3,5);
+            printf("Joueur 4 est : IA4, votre pion est le pic: %c\n",6);
             break;
         case 4:
             choixNom(j1);
-            printf("Le joueur 1 est : %s\n",j1);
             choixNom(j2);
-            printf("Le joueur 2 est : %s\n",j2);
             choixNom(j3);
-            printf("Le joueur 3 est : %s\n",j3);
             choixNom(j4);
-            printf("Le joueur 4 est : %s\n",j4);
+
+        printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
+        printf("Joueur 2 est : %s, votre pion est le carreau : %c\n",j2,4);
+        printf("Joueur 3 est : %s, votre pion est le trefle : %c\n",j3,5);
+        printf("Joueur 4 est : %s, votre pion est le pic: %c\n",j4,6);
             break;
         default:
             printf("ERREUR\n");
@@ -67,34 +70,7 @@ printf("entrer votre nom : ");
     scanf("%s", nom);
 }
 
-int choixPion(int a)
-{
-    printf("taper un nombre pour choisir un pion parmis les suivants :\n 1.Le coeur\n 2.Le carreau\n 3. Le trèfle\n 4.Le pic\n ");
-    scanf("%d", &a);
-    while(a<1 || a>4)
-    {
-        printf("veuillez choisir une valeur valide parmis :\n 1.Le coeur\n 2.Le carreau\n 3. Le trèfle\n 4.Le pic\n ");
-        scanf("%d", &a);
-    }
 
-    if (a == 1)
-    {
-        printf("vous avez choisis :%c",3);
-    }
-    else if (a == 2)
-    {
-        printf("vous avez choisis :%c",4);
-    }
-    else if (a == 3)
-    {
-        printf("vous avez choisis :%c",5);
-    }
-    else if (a == 4)
-    {
-        printf("vous avez choisis :%c",6);
-    }
-
-}
 ------------------------------------------
 //
 // Created by elhad on 05/11/2024.
@@ -103,5 +79,4 @@ int choixPion(int a)
 #ifndef FONCTION_H
 #define FONCTION_H
 void choixNom(char nom[10]);
-int choixPion(int);
 #endif //FONCTION_H
