@@ -1,156 +1,61 @@
 #include <stdio.h>
-
-#define SIZE 9 // Taille du plateau
-
-// Fonction pour afficher le plateau
-void Board() {
-    // Afficher les lettres en haut
-    printf("   A B C D E F G H I\n");
-
-    // Afficher les numéros sur le côté gauche et le plateau
-    for (int i = 0; i < SIZE; i++) {
-        printf("%d ", i + 1); // Affiche le numéro de ligne
-        for (int j = 0; j < SIZE; j++) {
-            printf(" ."); // Représentation des cases vides
-        }
-        printf("\n");
-    }
-}
-
-int main() {
-    Board(); // Appeler la fonction pour afficher le plateau
-    return 0;
-}
----------------------------------------------------------------------------------
-#include <stdio.h>
-
-#define SIZE 9
-
-// Fonction pour initialiser le plateau avec des cases vides
-void initialiser_plateau(char plateau[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            plateau[i][j] = ' ';  // Remplir chaque case avec un espace
-        }
-    }
-}
-
-// Fonction pour afficher le plateau avec les séparateurs alignés
-void afficher_plateau(char plateau[SIZE][SIZE]) {
-    // Affichage des indices horizontaux (A à I)
-    printf("     ");
-    for (int j = 0; j < SIZE; j++) {
-        printf("   %c  ", 'A' + j);  // Afficher les lettres de A à I
-    }
-    printf("\n");
-
-    // Affichage du plateau avec les indices verticaux (1 à 9)
-    for (int i = 0; i < SIZE; i++) {
-        // Afficher l'indice vertical (1 à 9)
-        printf("  %d  ", i + 1);  // Afficher les numéros de 1 à 9
-
-        // Affichage de la ligne du plateau avec les séparateurs horizontaux
-        for (int j = 0; j < SIZE; j++) {
-            printf("+-----");  // Séparateur entre les cases
-        }
-        printf("+\n");
-
-        // Affichage des cases du plateau
-        for (int j = 0; j < SIZE; j++) {
-            if (plateau[i][j] == ' ') {
-                printf("     |");  // Case vide
-            } else {
-                printf(" | %c  ", plateau[i][j]);  // Afficher le contenu de la case
-            }
-        }
-        printf("     |\n");
-    }
-
-    // Affichage de la dernière ligne de séparateurs
-    printf("     ");
-    for (int j = 0; j < SIZE; j++) {
-        printf("+-----");  // Séparateurs des cases
-    }
-    printf("+\n");
-}
-
-int main() {
-    char plateau[SIZE][SIZE];
-
-    // Initialiser le plateau
-    initialiser_plateau(plateau);
-
-    // Afficher le plateau initial
-    afficher_plateau(plateau);
-
-    return 0;
-}
---------------------------------------------------------------
-#include <stdio.h>
 #include<windows.h>
 
 #define SIZE 9
 
-void color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de couleurs
+void color(int couleurDuTexte,int couleurDeFond)
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);
 }
 
-// Fonction pour initialiser le plateau avec des cases vides
 void initialiser_plateau(char plateau[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            plateau[i][j] = ' ';  // Remplir chaque case avec un espace
+            plateau[i][j] = ' ';
         }
     }
 }
 
-// Fonction pour afficher le plateau avec les séparateurs alignés
 void afficher_plateau(char plateau[SIZE][SIZE]) {
-    // Affichage des indices horizontaux (A à I)
+    color(0,15);
     printf("     ");
+    color(15,0);
     for (int j = 0; j < SIZE; j++) {
         color(0,15);
-        printf("   %c  ", 'A' + j);// Afficher les lettres de A à I
+        printf("   %c  ", 'A' + j);
         color(15,0);
     }
     printf("\n");
 
-    // Affichage du plateau avec les indices verticaux (1 à 9)
     for (int i = 0; i < SIZE; i++) {
-        // Afficher l'indice vertical (1 à 9)
         color(0,15);
-        printf("  %d  ", i + 1);  // Afficher les numéros de 1 à 9
+        printf("  %d  ", i + 1);
         color(15,0);
 
-        // Affichage de la ligne du plateau avec les séparateurs horizontaux
         for (int j = 0; j < SIZE; j++) {
             color(0,15);
             printf("+-----");  // Séparateur entre les cases
-            color(15,0);
         }
         printf("+\n");
 
-        // Affichage des cases du plateau
         for (int j = 0; j < SIZE; j++) {
             color(0,15);
             if (plateau[i][j] == ' ') {
-                printf("     |");  // Case vide
+                printf("     |");
             } else {
-                printf(" | %c  ", plateau[i][j]);  // Afficher le contenu de la case
+                printf(" | %c  ", plateau[i][j]);
             }
-            color(15,0);
+
         }
         printf("     |\n");
+
     }
 
-    // Affichage de la dernière ligne de séparateurs
     printf("     ");
     for (int j = 0; j < SIZE; j++) {
         color(0,15);
-        printf("+-----");  // Séparateurs des cases
-        color(15,0);
+        printf("+-----");
     }
     printf("+\n");
 }
@@ -158,10 +63,8 @@ void afficher_plateau(char plateau[SIZE][SIZE]) {
 int main() {
     char plateau[SIZE][SIZE];
 
-    // Initialiser le plateau
     initialiser_plateau(plateau);
 
-    // Afficher le plateau initial
     afficher_plateau(plateau);
 
     return 0;
