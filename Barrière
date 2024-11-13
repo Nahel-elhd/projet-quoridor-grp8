@@ -1,0 +1,67 @@
+Fonction barriere.h 
+
+#ifndef BARRIERE_H
+#define BARRIERE_H
+
+int placer_barriere(char plateau[9][9], int x, int y, char direction);
+
+
+#endif //BARRIERE_H
+
+--------------------------------------------------------------
+
+Fonction barriere.c
+
+#include <stdio.h>
+#include "barriere.h"
+
+// Fonction qui place une barrière sur le plateau
+int placer_barriere(char plateau[9][9], int x, int y, char direction) {
+    if (direction == 'H') {  // Barrière horizontale
+        if (y < 8 && plateau[x][y] == ' ' && plateau[x][y + 1] == ' ') {
+            plateau[x][y] = '-';
+            plateau[x][y + 1] = '-';
+            return 1;  // Barrière placée avec succès
+        }
+    } else if (direction == 'V') {  // Barrière verticale
+        if (x < 8 && plateau[x][y] == ' ' && plateau[x + 1][y] == ' ') {
+            plateau[x][y] = '|';
+            plateau[x + 1][y] = '|';
+            return 1;  // Barrière placée avec succès
+        }
+    }
+
+    printf("Impossible de placer la barrière. Vérifiez les cases disponibles.\n");
+    return 0;
+}
+
+--------------------------------------------------------------------
+
+A ajouter dans le main 
+
+#include "barriere.h"
+
+int main() {
+    int choix;
+    char plateau[SIZE][SIZE];
+    int x = 4, y = 4;  
+    char direction;
+    int xBarriere, yBarriere;
+    char directionBarriere;
+
+    while (1) {
+        afficherMenu();
+        scanf("%d", &choix);
+
+        switch (choix) {
+        case 1:
+            afficherJeu();  
+
+           
+            printf("Entrez les coordonnées de la barrière (x, y) et la direction (H pour horizontal, V pour vertical) : ");
+            scanf("%d %d %c", &xBarriere, &yBarriere, &directionBarriere);
+            
+            
+            if (placer_barriere(plateau, xBarriere, yBarriere, directionBarriere)) {
+                afficher_plateau(plateau);  // Afficher le plateau après avoir placé la barrière
+            }
