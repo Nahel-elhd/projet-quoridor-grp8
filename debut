@@ -80,3 +80,4 @@ printf("entrer votre nom : ");
 #define FONCTION_H
 void choixNom(char nom[10]);
 #endif //FONCTION_H
+-----------------------------------------------------------------------------------------------------------------------
