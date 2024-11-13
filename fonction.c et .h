@@ -1,22 +1,35 @@
 H!!!!!!!!
-#ifndef FONCTION_H
+
+
+  #ifndef FONCTION_H
 #define FONCTION_H
+#include <windows.h>
+#define TAILLE 9
 void choixNom(char nom[10]);
 void lancerNouvellePartie();
 void reprendrePartieSauvegardee();
 void afficherScores();
 void afficherMenu();
 void pion();
+void color(int,int);
+void CréationDuPlateau(char plateau[TAILLE][TAILLE]);
+void Plateau(char plateau[TAILLE][TAILLE]);
+void Plateau_final(char plateau[TAILLE][TAILLE]);
+void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y);
+
 #endif //FONCTION_H
 -----------------------------------------------------------------------------------------------------------
 C!!!!!!!!!!!!!!
   
+
 #include "fct.h"
 #include <stdio.h>
+#include<windows.h>
+#define TAILLE 9
 void choixNom(char nom[10])
 {
     printf("entrer votre nom : ");
-    scanf("%s", nom);
+    scanf("%9s", nom);
 }
 void lancerNouvellePartie() {
     printf("Lancement d'une nouvelle partie...\n\n");
@@ -26,8 +39,6 @@ void lancerNouvellePartie() {
 void reprendrePartieSauvegardee() {
     printf("Reprise d'une partie sauvegardée...\n");
 }
-
-
 void afficherScores() {
     printf("Affichage des scores des joueurs...\n");
 }
@@ -35,11 +46,10 @@ void afficherMenu() {
     printf("-----!! Menu du Jeu Quoridor !!-----\n");
     printf("1. Lancer une nouvelle partie\n");
     printf("2. Reprendre une partie sauvegardee\n");
-    printf("3. Afficher l'aide\n");
-    printf("4. Afficher les scores des joueurs\n");
-    printf("5. Quitter le jeu\n");
+    printf("3. Afficher les scores des joueurs\n");
+    printf("4. Quitter le jeu\n");
     printf("\n");
-    printf("Veuillez choisir une option (entre 1 et 5) :\n ");
+    printf("Veuillez choisir une option (entre 1 et 4) :\n ");
 }
 void pion()
 {
@@ -93,3 +103,72 @@ void pion()
     }
 
 }
+void color(int couleurDuTexte,int couleurDeFond)
+{
+    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);
+}
+void CréationDuPlateau(char plateau[TAILLE][TAILLE]) {
+    for (int i = 0; i < TAILLE; i++) {
+        for (int j = 0; j < TAILLE; j++) {
+            plateau[i][j] = ' ';
+        }
+    }
+}
+void Plateau(char plateau[TAILLE][TAILLE]) {
+    color(0,15);
+    printf("     ");
+    color(15,0);
+    for (int j = 0; j < TAILLE; j++) {
+        color(0,15);
+        printf("   %c  ", 'A' + j);
+        color(15,0);
+    }
+    printf("\n");
+
+    for (int i = 0; i < TAILLE; i++) {
+        color(0,15);
+        printf("  %d  ", i + 1);
+        color(15,0);
+
+        for (int j = 0; j < TAILLE; j++) {
+            color(0,15);
+            printf("+-----");
+        }
+        printf("+\n");
+
+        for (int j = 0; j < TAILLE; j++) {
+            color(0,15);
+            if (plateau[i][j] == ' ') {
+                printf("     |");
+            } else {
+                printf("  %c  |", plateau[i][j]);
+            }
+
+        }
+        printf("     |\n");
+
+    }
+
+    printf("     ");
+    for (int j = 0; j < TAILLE; j++) {
+        color(0,15);
+        printf("+-----");
+    }
+    printf("+\n");
+}
+void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y)
+{
+    plateau[*x][*y]=' ';
+    plateau[X][Y]=3;
+    *x=X;
+    *y=Y;
+}
+void Plateau_final(char plateau[TAILLE][TAILLE])
+{
+    CréationDuPlateau(plateau);
+    int xC=0 ,yC=5;
+    plateau[xC][yC]=3;
+    Plateau(plateau);
+}
+
