@@ -1,1 +1,84 @@
+Fonction deplacement.h 
+
+#ifndef DÉPLACEMENT_H
+#define DÉPLACEMENT_H
+
+void deplacement(char plateau[9][9], int *x, int *y, char direction);
+
+#endif //DÉPLACEMENT_H
+
+-----------------------------------------------------------------------------
+
+Fonction deplacement.c 
+
+#include <stdio.h>
+#include "deplacement.h"
+
+
+void deplacement(char plateau[9][9], int *x, int *y, char direction) {
+    plateau[*x][*y] = ' ';
+
+    switch(direction) {
+    case 'H': // Haut
+        if (*x > 0) (*x)--;  
+        break;
+    case 'B': // Bas
+        if (*x < 8) (*x)++; 
+        break;
+    case 'G': // Gauche
+        if (*y > 0) (*y)--;  
+        break;
+    case 'D': // Droite
+        if (*y < 8) (*y)++;  
+        break;
+    default:
+        printf("Direction invalide !\n");
+        return;
+    }
+
+    plateau[*x][*y] = 'X';  
+}
+
+------------------------------------------------------------------------
+
+A ajouter dans le main 
+
+int main() {
+    int choix;
+    char plateau[SIZE][SIZE];
+    int x = 4, y = 4;  
+    char direction;
+
+    while (1) {
+        afficherMenu();
+        scanf("%d", &choix);
+
+        switch (choix) {
+        case 1:
+            afficherJeu();  
+            printf("Entrez la direction du déplacement (H/B/G/D) : ");
+            scanf(" %c", &direction);  
+            deplacement(plateau, &x, &y, direction);  // Déplacer le pion
+            afficher_plateau(plateau);  
+            break;
+        case 2:
+            reprendrePartieSauvegardee();
+            break;
+        case 3:
+            afficherAide();
+            break;
+        case 4:
+            afficherScores();
+            break;
+        case 5:
+            printf("Merci d'avoir joué ! À bientôt.\n");
+            return 0;
+        default:
+            printf("Choix invalide. Veuillez réessayer.\n");
+            break;
+        }
+    }
+
+
+
 
