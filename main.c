@@ -21,7 +21,7 @@ int main()
 
         break;
     case 4:
-        printf("Merci d'avoir joue ! A bientot.\n");
+       printf("Merci d'avoir joue... A bientot %c\n",1);
         return 0;
     default:
         printf("Choix invalide. Veuillez reessayer.\n");
