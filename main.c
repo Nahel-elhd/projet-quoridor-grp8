@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include"fct.h"
+#define TAILLE 9
 
 int main()
 {
     int choix;
+    char plateau_de_jeu[TAILLE][TAILLE];
     afficherMenu();
     scanf("%d", &choix);
 
@@ -11,7 +13,7 @@ int main()
     case 1:
         lancerNouvellePartie();
         pion();
-
+        Plateau_final(plateau_de_jeu);
         break;
     case 2:
         reprendrePartieSauvegardee();
@@ -21,7 +23,7 @@ int main()
 
         break;
     case 4:
-       printf("Merci d'avoir joue... A bientot %c\n",1);
+        printf("Merci d'avoir joue ! A bientot.\n");
         return 0;
     default:
         printf("Choix invalide. Veuillez reessayer.\n");
@@ -31,4 +33,3 @@ int main()
 
     return 0;
 }
-
