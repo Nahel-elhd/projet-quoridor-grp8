@@ -1,20 +1,22 @@
 H!!!!!!!!
 
-
-  #ifndef FONCTION_H
+#ifndef FONCTION_H
 #define FONCTION_H
 #include <windows.h>
 #define TAILLE 9
+typedef struct
+{
+    char nom[50];char pion;int x;int y;
+}Joueur;
 void choixNom(char nom[10]);
 void lancerNouvellePartie();
 void reprendrePartieSauvegardee();
 void afficherScores();
 void afficherMenu();
-void pion();
+void pion(Joueur joueurs[],int nbr,char plateau[TAILLE][TAILLE]);
 void color(int,int);
 void CréationDuPlateau(char plateau[TAILLE][TAILLE]);
 void Plateau(char plateau[TAILLE][TAILLE]);
-void Plateau_final(char plateau[TAILLE][TAILLE]);
 void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y);
 
 #endif //FONCTION_H
@@ -23,14 +25,13 @@ C!!!!!!!!!!!!!!
   
 
 #include "fct.h"
+
+#include <math.h>
 #include <stdio.h>
 #include<windows.h>
 #define TAILLE 9
-void choixNom(char nom[10])
-{
-    printf("entrer votre nom : ");
-    scanf("%9s", nom);
-}
+
+
 void lancerNouvellePartie() {
     printf("Lancement d'une nouvelle partie...\n\n");
     printf("On vous souhaite une bonne partie\n");
@@ -51,57 +52,39 @@ void afficherMenu() {
     printf("\n");
     printf("Veuillez choisir une option (entre 1 et 4) :\n ");
 }
-void pion()
+void pion( Joueur joueurs[],int nbr,char plateau[TAILLE][TAILLE])
 {
-    int nbr_joueur;
-    char j1[10];
-    char j2[10];
-    char j3[10];
-    char j4[10];
+    char different_pion[]={3,4,5,6};
 
-    printf("choisissez le nombre de joueur humain (1 à 4 max) :\n");
-    scanf("%d",&nbr_joueur);
-
-    switch (nbr_joueur)
+    for(int i = 0; i < nbr; i++)
     {
-    case 1:
-        choixNom(j1);
-        printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
-        printf("Joueur 2 est : IA2 , votre pion est le carreau : %c\n",4);
-
-        break;
-    case 2:
-        choixNom(j1);
-        choixNom(j2);
-        printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
-        printf("Joueur 2 est : %s , votre pion est le carreau : %c\n",j2,4);
-
-        break;
-    case 3:
-        choixNom(j1);
-        choixNom(j2);
-        choixNom(j3);
-        printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
-        printf("Joueur 2 est : %s, votre pion est le carreau : %c\n",j2,4);
-        printf("Joueur 3 est : %s, votre pion est le trefle : %c\n",j3,5);
-        printf("Joueur 4 est : IA4, votre pion est le pic: %c\n",6);
-        break;
-    case 4:
-        choixNom(j1);
-        choixNom(j2);
-        choixNom(j3);
-        choixNom(j4);
-
-        printf("Joueur 1 est : %s, votre pion est le coeur : %c\n",j1,3);
-        printf("Joueur 2 est : %s, votre pion est le carreau : %c\n",j2,4);
-        printf("Joueur 3 est : %s, votre pion est le trefle : %c\n",j3,5);
-        printf("Joueur 4 est : %s, votre pion est le pic: %c\n",j4,6);
-        break;
-    default:
-        printf("ERREUR\n");
-        break;
+        printf("Entrer le nom du joueur %d\n",i+1);
+        scanf("%s",&joueurs[i].nom);
+        joueurs[i].pion=different_pion[i];
+        if (i==0)
+        {
+            joueurs[i].x=5;
+            joueurs[i].y=0;
+        }
+        if (i==1)
+        {
+            joueurs[i].x=5;
+            joueurs[i].y=8;
+        }  if (i==2)
+        {
+            joueurs[i].x=1;
+            joueurs[i].y=4;
+        }  if (i==3)
+        {
+            joueurs[i].x=9;
+            joueurs[i].y=4;
+        }
+        plateau[joueurs[i].y][joueurs[i].x]=joueurs[i].pion;
     }
 
+    printf("-----------------\n");
+    printf("Bonne partie !\n");
+    printf("-----------------\n");
 }
 void color(int couleurDuTexte,int couleurDeFond)
 {
@@ -164,11 +147,5 @@ void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y)
     *x=X;
     *y=Y;
 }
-void Plateau_final(char plateau[TAILLE][TAILLE])
-{
-    CréationDuPlateau(plateau);
-    int xC=0 ,yC=5;
-    plateau[xC][yC]=3;
-    Plateau(plateau);
-}
+
 
