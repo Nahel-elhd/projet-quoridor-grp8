@@ -4,16 +4,25 @@
 
 int main()
 {
-    int choix;
+    int choix,nbr;
     char plateau_de_jeu[TAILLE][TAILLE];
+    Joueur joueurs[4];
     afficherMenu();
     scanf("%d", &choix);
 
     switch (choix) {
     case 1:
         lancerNouvellePartie();
-        pion();
-        Plateau_final(plateau_de_jeu);
+        CréationDuPlateau(plateau_de_jeu);
+        printf("choisissez le nombre de joueur humain (1 à 4 max) :\n");
+        scanf("%d",&nbr);
+        while (nbr> 4 || nbr< 1)
+        {
+            printf("ERREUR,veuillez choisis une valeur valide.\n");
+            scanf("%d",&nbr);
+        }
+        pion(joueurs,nbr, plateau_de_jeu);
+        Plateau(plateau_de_jeu);
         break;
     case 2:
         reprendrePartieSauvegardee();
