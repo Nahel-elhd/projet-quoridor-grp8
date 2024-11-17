@@ -16,7 +16,7 @@ int main()
         CréationDuPlateau(plateau_de_jeu);
         printf("choisissez le nombre de joueur humain (1 à 4 max) :\n");
         scanf("%d",&nbr);
-        while (nbr> 4 || nbr< 1)
+        while (nbr!= 4 && nbr!= 1)
         {
             printf("ERREUR,veuillez choisis une valeur valide.\n");
             scanf("%d",&nbr);
