@@ -24,6 +24,7 @@ void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y);
 C!!!!!!!!!!!!!!
   
 
+
 #include "fct.h"
 
 #include <math.h>
@@ -140,12 +141,17 @@ void Plateau(char plateau[TAILLE][TAILLE]) {
     }
     printf("+\n");
 }
-void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y)
+void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y,Joueur joueurs[])
 {
-    plateau[*x][*y]=' ';
-    plateau[X][Y]=3;
-    *x=X;
-    *y=Y;
+    char different_pion[]={3,4,5,6};
+    for(int i = 0; i < TAILLE; i++)
+    {
+        printf("")
+        plateau[joueurs[i].x][joueurs[i].y]=' ';
+        scanf("%s",&joueurs[i].x);
+        joueurs[i].pion=different_pion[i];
+        plateau[X][Y]=3;
+        joueurs[i].x=X;
+        joueurs[i].y=Y;
+    }
 }
-
-
