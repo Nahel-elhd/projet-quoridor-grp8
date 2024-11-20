@@ -23,6 +23,11 @@ int main()
         }
         pion(joueurs,nbr, plateau_de_jeu);
         Plateau(plateau_de_jeu);
+for(int tour=0; tour<5; tour++)
+{
+    deplacementDuPion(plateau_de_jeu, nbr, joueurs);
+    Plateau(plateau_de_jeu);
+}
         break;
     case 2:
         reprendrePartieSauvegardee();
