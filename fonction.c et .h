@@ -1,12 +1,10 @@
-H!!!!!!!!
-
 #ifndef FONCTION_H
 #define FONCTION_H
 #include <windows.h>
 #define TAILLE 9
 typedef struct
 {
-    char nom[50];char pion;int x;int y;
+    char nom[50];char pion;int x;int y;int brx; int bry;
 }Joueur;
 void choixNom(char nom[10]);
 void lancerNouvellePartie();
@@ -17,7 +15,9 @@ void pion(Joueur joueurs[],int nbr,char plateau[TAILLE][TAILLE]);
 void color(int,int);
 void CréationDuPlateau(char plateau[TAILLE][TAILLE]);
 void Plateau(char plateau[TAILLE][TAILLE]);
-void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y);
+void deplacementDuPion(char plateau[TAILLE][TAILLE],int nbr,Joueur joueurs[4]);
+void afficherPlateau(char plateau[TAILLE][TAILLE]);
+
 
 #endif //FONCTION_H
 -----------------------------------------------------------------------------------------------------------
@@ -60,24 +60,24 @@ void pion( Joueur joueurs[],int nbr,char plateau[TAILLE][TAILLE])
     for(int i = 0; i < nbr; i++)
     {
         printf("Entrer le nom du joueur %d\n",i+1);
-        scanf("%s",&joueurs[i].nom);
+        scanf("%s",joueurs[i].nom);
         joueurs[i].pion=different_pion[i];
         if (i==0)
         {
-            joueurs[i].x=5;
+            joueurs[i].x=4;
             joueurs[i].y=0;
         }
         if (i==1)
         {
-            joueurs[i].x=5;
+            joueurs[i].x=4;
             joueurs[i].y=8;
         }  if (i==2)
         {
-            joueurs[i].x=1;
+            joueurs[i].x=0;
             joueurs[i].y=4;
         }  if (i==3)
         {
-            joueurs[i].x=9;
+            joueurs[i].x=8;
             joueurs[i].y=4;
         }
         plateau[joueurs[i].y][joueurs[i].x]=joueurs[i].pion;
@@ -99,59 +99,86 @@ void CréationDuPlateau(char plateau[TAILLE][TAILLE]) {
         }
     }
 }
-void Plateau(char plateau[TAILLE][TAILLE]) {
-    color(0,15);
-    printf("     ");
-    color(15,0);
-    for (int j = 0; j < TAILLE; j++) {
-        color(0,15);
-        printf("   %c  ", 'A' + j);
-        color(15,0);
-    }
-    printf("\n");
-
-    for (int i = 0; i < TAILLE; i++) {
-        color(0,15);
-        printf("  %d  ", i + 1);
-        color(15,0);
-
-        for (int j = 0; j < TAILLE; j++) {
+void Plateau(char plateau[TAILLE][TAILLE])
+{
+    for(int i=0; i < TAILLE; i++)
+    {
+        for(int j=0; j < TAILLE; j++)
+        {
             color(0,15);
             printf("+-----");
         }
         printf("+\n");
 
-        for (int j = 0; j < TAILLE; j++) {
+        for(int j=0; j < TAILLE; j++)
+        {
             color(0,15);
-            if (plateau[i][j] == ' ') {
-                printf("     |");
-            } else {
-                printf("  %c  |", plateau[i][j]);
-            }
+            printf("|  %c  ",plateau[i][j]);
 
         }
-        printf("     |\n");
-
+        printf("|\n");
     }
 
-    printf("     ");
-    for (int j = 0; j < TAILLE; j++) {
+    for(int j=0; j < TAILLE; j++)
+    {
         color(0,15);
         printf("+-----");
     }
     printf("+\n");
+    color(15,0);
 }
-void deplacementDuPion(char plateau[TAILLE][TAILLE],int*x,int*y,int X, int Y,Joueur joueurs[])
+
+void deplacementDuPion(char plateau[TAILLE][TAILLE],int nbr,Joueur joueurs[4])
 {
-    char different_pion[]={3,4,5,6};
-    for(int i = 0; i < TAILLE; i++)
+    int X,Y;
+    char direction;
+
+
+    for(int i = 0; i < nbr; i++)
     {
-        printf("")
-        plateau[joueurs[i].x][joueurs[i].y]=' ';
-        scanf("%s",&joueurs[i].x);
-        joueurs[i].pion=different_pion[i];
-        plateau[X][Y]=3;
+        printf("tour de %s (pion %c):\n",joueurs->nom,joueurs->pion);
+        printf("choisissez votre direction avec Z(haut) Q(gauche) S(bas) et D(droite)\n");
+
+        scanf(" %c",&direction);
+        X=joueurs[i].x;
+        Y=joueurs[i].y;
+
+            if(direction=='Z'||direction=='z')
+            {
+                Y--;
+            }
+            else if(direction=='Q'||direction=='q')
+            {
+                X--;
+            }
+            else if(direction=='S'||direction=='s')
+            {
+                Y++;
+            }
+            else if(direction=='d'||direction=='D')
+            {
+                X++;
+            }
+            else
+            {
+                printf("direction invalide. Veuillez reessayer.\n");
+                i--;
+                continue;
+            }
+        if(X>= 0 && X< TAILLE && Y>= 0 && Y< TAILLE && plateau[X][Y] == ' ')
+    {
+        plateau[joueurs[i].y][joueurs[i].x]=' ';
         joueurs[i].x=X;
         joueurs[i].y=Y;
+        plateau[Y][X]=joueurs[i].pion;
+    }
+        else
+    {
+        printf("mouvement invalide\n");
+        i--;
+    }
+
+
     }
 }
+
