@@ -19,7 +19,7 @@
         printf("Le joueur '%c' a atteint la colonne de victoire (y=0) ! Il a gagné !\n", joueur.pion);
         return 1;
     }
-    return 0;  // Aucun gagnant
+    return 0; 
 }
 --------------------------------------------------------------------------
 "le truc a ajouter au programme ":
