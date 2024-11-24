@@ -9,12 +9,8 @@ int main() {
     int charger_partie = charge_etat_jeu(filename, &jeu);
 if (!charger_partie) {
    
-    for (int i = 0; i < jeu.nb_joueurs; i++) {
-        jeu.player_x[i] = 4; // Position initiale des joueurs
-        jeu.player_y[i] = (i == 0) ? 0 : (i == 1) ? 8 : (i == 2) ? 4 : 4; 
-    }
-    jeu.wallCount = 0; 
-}
+    printf("fichier introuvable.\n ");
+return0 }
     printf("Voulez-vous sauvegarder et quitter ? (1 = Oui, 0 = Non) : ");
     int choix;
     scanf("%d", &choix);
@@ -42,8 +38,8 @@ f.h
 
 typedef struct {
     int player_x[MAX_JOUEURS], player_y[MAX_JOUEURS];
-    int walls[100][3];
-    int wallCount;
+    int mur[100][3];
+    int mur ;
     int nb_joueurs;
 } etat_jeu;
 void sauv_etat_jeu(const char *filename, etat_jeu *jeu) ;
@@ -75,7 +71,7 @@ void sauv_etat_jeu(const char *filename, etat_jeu *jeu) {
 
 
 int charge_etat_jeu(const char *filename, etat_jeu *jeu) {
-    FILE *file = fopen(filename, "rb");
+    FILE *file = fopen(filename, "game");
     if (file == NULL) {
         printf("Aucune sauvegarde trouvée. Commencer une nouvelle partie.\n");
         return 0;
