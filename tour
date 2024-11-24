@@ -181,10 +181,10 @@ int poserBarriere(char plateau[TAILLE][TAILLE], int barrieresHorizontales[TAILLE
         return 0;
     }
 
-    int x1, y1, orientation;
+    int x1, y1, orientation, X;
     printf("Entrez les coordonnees de la barriere (format : x y orientation[1=Horizontal, 2=Vertical]) : ");
-    scanf("%d %d %d", &x1, &y1, &orientation);
-
+    scanf("%d %d %d", &X, &y1, &orientation);
+x1=X-1
     // Vérifier si les coordonnées sont valides
     if (x1 < 0 || x1 >= TAILLE || y1 < 0 || y1 >= TAILLE ||
         (orientation != 1 && orientation != 2)) {
