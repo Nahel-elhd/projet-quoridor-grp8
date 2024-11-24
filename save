@@ -1,1 +1,95 @@
+"main "
+
+
+#include <stdio.h>
+#include "fo.h"
+int main() {
+    etat_jeu jeu;  
+    const char *filename = "quoridor_sauvegarde.com"; 
+    int charger_partie = charge_etat_jeu(filename, &jeu);
+if (!charger_partie) {
+   
+    for (int i = 0; i < jeu.nb_joueurs; i++) {
+        jeu.player_x[i] = 4; // Position initiale des joueurs
+        jeu.player_y[i] = (i == 0) ? 0 : (i == 1) ? 8 : (i == 2) ? 4 : 4; 
+    }
+    jeu.wallCount = 0; 
+}
+    printf("Voulez-vous sauvegarder et quitter ? (1 = Oui, 0 = Non) : ");
+    int choix;
+    scanf("%d", &choix);
+
+    if (choix == 1) {
+        sauv_etat_jeu(filename, &jeu);
+        printf("Partie sauvegardée. Vous pouvez maintenant quitter.\n");
+    } else {
+        printf("La partie continue...\n");
+    }
+
+    return 0;
+}   
+
+_____________________________________________
+f.h
+
+
+#ifndef FO_H
+#define FO_H
+
+#endif //FO_H
+#define MAX_JOUEURS 4
+
+
+typedef struct {
+    int player_x[MAX_JOUEURS], player_y[MAX_JOUEURS];
+    int walls[100][3];
+    int wallCount;
+    int nb_joueurs;
+} etat_jeu;
+void sauv_etat_jeu(const char *filename, etat_jeu *jeu) ;
+int charge_etat_jeu(const char *filename, etat_jeu *jeu);
+___________________________________________________
+f.c
+
+#include "fo.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void sauv_etat_jeu(const char *filename, etat_jeu *jeu) {
+    FILE *file = fopen(filename, "wb");
+    if (file == NULL) {
+        printf("Erreur d'ouverture du fichier pour la sauvegarde.\n");
+        return;
+    }
+
+    size_t result = fwrite(jeu, sizeof(etat_jeu), 1, file);
+    if (result != 1) {
+        printf("Erreur lors de l'écriture dans le fichier.\n");
+    } else {
+        printf("Le jeu a été sauvegardé avec succès dans %s.\n", filename);
+    }
+
+    fclose(file);
+}
+
+
+int charge_etat_jeu(const char *filename, etat_jeu *jeu) {
+    FILE *file = fopen(filename, "rb");
+    if (file == NULL) {
+        printf("Aucune sauvegarde trouvée. Commencer une nouvelle partie.\n");
+        return 0;
+    }
+
+    size_t result = fread(jeu, sizeof(etat_jeu), 1, file);
+    if (result != 1) {
+        printf("Erreur lors du chargement du fichier.\n");
+        fclose(file);
+        return 0;
+    }
+
+    fclose(file);
+    printf("Partie chargée avec succès à partir de %s.\n", filename);
+    return 1;
+}
 
