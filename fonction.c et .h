@@ -316,3 +316,91 @@ int verifierCheminLibre(char plateau[TAILLE][TAILLE], Joueur *joueurs) {
     return 1;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#ifndef FCT_H
+#define FCT_H
+
+
+// Définir la taille du plateau
+#define TAILLE 9
+#define MAX_JOUEURS 4
+
+// Structure représentant un joueur
+typedef struct {
+    char nom[50];        // Nom du joueur
+    char pion;           // Symbole représentant le pion du joueur
+    int x, y;            // Coordonnées du joueur sur le plateau
+    int barrieresRestantes; // Nombre de barrières restantes pour ce joueur
+} Joueur;
+
+// Prototypes des fonctions
+void lancerNouvellePartie();
+void reprendrePartieSauvegardee();
+void afficherMenu();
+void pion(Joueur joueurs[], int nbr, char plateau[TAILLE][TAILLE]);
+void color(int couleurDuTexte, int couleurDeFond);
+int deplacementDuPion(char plateau[TAILLE][TAILLE], Joueur *joueur);
+void CréationDuPlateau(char plateau[TAILLE][TAILLE]);
+void Plateau(char plateau[TAILLE][TAILLE], int barrieresHorizontales[TAILLE - 1][TAILLE], int barrieresVerticales[TAILLE][TAILLE - 1]);
+int verifier_victoire(Joueur joueur);
+int poserBarriere(char plateau[TAILLE][TAILLE], int barrieresHorizontales[TAILLE - 1][TAILLE], int barrieresVerticales[TAILLE][TAILLE - 1], Joueur *joueur);
+void jeu(Joueur joueurs[4], int nbr);
+int gererjeu();
+int verifierCheminLibre(char plateau[TAILLE][TAILLE], Joueur *joueurs);
+typedef struct {
+    int player_x[MAX_JOUEURS], player_y[MAX_JOUEURS];
+    int walls[100][3];
+    int wallCount;
+    int nb_joueurs;
+} etat_jeu;
+void sauv_etat_jeu(const char *filename, etat_jeu *jeu) ;
+int charge_etat_jeu(const char *filename, etat_jeu *jeu);
+
+
+
+#endif // FCT_H
