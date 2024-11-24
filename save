@@ -6,7 +6,7 @@
 int main() {
     etat_jeu jeu;  
     const char *filename = "quoridor_sauvegarde.com"; 
-    int charger_partie = charge_etat_jeu(filename, &jeu);
+    int charger_partie = charger_etat_jeu(filename, &jeu);
 if (!charger_partie) {
    
     printf("fichier introuvable.\n ");
