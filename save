@@ -15,7 +15,7 @@ return0 }
     int choix;
     scanf("%d", &choix);
 
-    if (choix == 1) {
+   1111111 if (choix == 1) {
         sauv_etat_jeu(filename, &jeu);
         printf("Partie sauvegardée. Vous pouvez maintenant quitter.\n");
     } else {
@@ -23,7 +23,7 @@ return0 }
     }
 
     return 0;
-}   
+}   1111111
 
 _____________________________________________
 f.h
